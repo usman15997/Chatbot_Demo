@@ -1,0 +1,115 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: greetings
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_offer_help
+
+- rule: sad mood
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+
+- rule: stop form execution
+  steps:
+  - intent: stop
+  - active_loop: null
+  - action: utter_offer_help
+
+- rule: happy mood
+  steps:
+  - intent: mood_great
+  - action: utter_happy
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: offer_help
+  steps:
+  - intent: help
+  - action: utter_offer_help
+
+- rule: Activate Card Status Form
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: temporary_block_intimation
+  - action: utter_inform_card_blocking_option
+  - action: card_status_update_form
+  - active_loop: card_status_update_form
+
+- rule: Deactivate Card Status Form
+  condition:
+  - active_loop: card_status_update_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: card_status_update_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_card_status_update
+  - action: utter_card_block_request_finished
+
+- rule: profile_update not implemented error
+  steps:
+  - intent: profile_update_intimation
+  - action: utter_not_implemented_yet
+  - action: utter_offer_help
+
+- rule: balance_inquiry
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: check_balance
+  - action: balance_inquiry_form
+  - active_loop: balance_inquiry_form
+
+- rule: Deactivate Balance Inquiry Form
+  condition:
+  - active_loop: balance_inquiry_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: balance_inquiry_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_balance_inquiry
+
+- rule: fallback
+  steps:
+  - intent: nlu_fallback
+  - action: utter_fallback
+
+- rule: respond to faq
+  steps:
+  - intent: faq
+  - action: utter_faq
+
+- rule: say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: thankyou
+  steps:
+  - intent: thankyou
+  - action: utter_noworries
+
+- rule: answer out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope

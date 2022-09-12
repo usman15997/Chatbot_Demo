@@ -1,0 +1,243 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- affirm
+- authenticate_me
+- bot_challenge
+- check_balance
+- deny
+- goodbye
+- greet
+- faq
+- help
+- inform_name
+- inform_number
+- mood_great
+- mood_unhappy
+- nlu_fallback
+- profile_update_intimation
+- stop
+- temporary_block_intimation
+entities:
+- number
+- profile_element
+- Person
+slots:
+  user_authenticated:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_intent
+      intent: authenticate_me
+      value: true
+  card_number:
+    type: any
+    influence_conversation: false
+    mappings:
+    - entity: number
+      type: from_entity
+      conditions:
+      - active_loop: card_status_update_form
+        requested_slot: card_number
+  last4ofcard:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: number
+      type: from_entity
+      conditions:
+      - active_loop: balance_inquiry_form
+        requested_slot: last4ofcard
+  SSN:
+    type: text
+    influence_conversation: false
+    mappings:
+    - entity: number
+      type: from_entity
+      conditions:
+      - active_loop: balance_inquiry_form
+        requested_slot: SSN
+  previous_form_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  next_form_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  repeated_validation_failures:
+    type: any
+    initial_value: 0
+    influence_conversation: false
+    mappings:
+    - type: custom
+  AA_CONTINUE_FORM:
+    type: any
+    influence_conversation: false
+    mappings:
+    - intent: affirm
+      type: from_intent
+      value: yes
+      conditions:
+      - active_loop: card_status_update_form
+        requested_slot: AA_CONTINUE_FORM
+      - active_loop: balance_inquiry_form
+        requested_slot: AA_CONTINUE_FORM
+    - intent: deny
+      type: from_intent
+      value: no
+      conditions:
+      - active_loop: card_status_update_form
+        requested_slot: AA_CONTINUE_FORM
+      - active_loop: balance_inquiry_form
+        requested_slot: AA_CONTINUE_FORM
+  requested_slot:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+
+responses:
+  utter_greet:
+  - text: Hi There.
+  utter_cheer_up:
+  - text: Don't worry buddy! everything will be alright
+  utter_happy:
+  - text: Great, carry on!
+  utter_noworries:
+  - text: You're welcome :)
+  utter_out_of_scope:
+  - text: Sorry, I'm not sure how to respond to that. Type "help" for assistance.
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_offer_help:
+  - text: |-
+      I'm here to help you about
+       -Temporary block
+       -Profile Update
+       -Balance Inquiry
+  utter_card_block_request_finished:
+  - text: If you need any other assistance, let me know by typing help
+  utter_inform_card_blocking_option:
+  - text: For your information , Card can be blocked through card holder website and mobile app. Or you can call us anytime on our helpline for further assistance
+  utter_fallback:
+  - text: I'm sorry, I didn't quite understand that.
+  utter_not_implemented_yet:
+  - text: This feature is under development and not available yet
+  utter_ask_card_status_update_form_user_authenticated:
+  - text: You First need to be Logged in to perform this action . You can write for example authenticate me to authenticate yourself
+  utter_empathy_for_card_loss:
+  - text: I am sorry that your card is misplaced/missing.To protect your card account, I'm going to place temporary block on it.
+  utter_ask_card_status_update_form_card_number:
+  - text: May i have your card number?
+  utter_ask_card_status_update_form_AA_CONTINUE_FORM:
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No , Cancel the card block request
+    text: Would you like to continue temporary block request?
+  utter_ask_balance_inquiry_form_Person:
+  - text: Your first and last name please?
+  utter_ask_balance_inquiry_form_user_authenticated:
+  - text: You First need to be Logged in for balance inquiry. You can write for example "authenticate me" to authenticate yourself
+  utter_ask_balance_inquiry_form_SSN:
+  - text: Please share last four digits of your SSN
+  utter_ask_balance_inquiry_form_AA_CONTINUE_FORM:
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No , Cancel the balance inquiry request
+    text: Would you like to continue balance inquiry request?
+  utter_faq/pin_change:
+  - text: You may change your PIN by calling the toll-free Customer Service Department number on the back of your card.
+  utter_faq/mailing_address:
+  - text: |-
+      - If you move or change your address, call the toll free Customer Service Department number on the back of your card.
+      - You will need to separately notify the federal paying agency about your new address.
+      - We does not provide this information to any federal agency.
+  utter_faq/card_replacement:
+  - text: |-
+      - If your card is lost or stolen, immediately call the toll free Customer Service Department number on the back of your card.
+      - Replacement card will arrive by standard mail within 7 to 10 days.
+  utter_faq/balance_discrepency:
+  - text: |-
+      - If you have a question about your balance or a transaction,you should immediately call the toll free Customer Service Department number on the back of your card to find out how to dispute a transaction
+
+  utter_faq/change_name:
+  - text: |-
+      Following process will be followed by relevant teams to cater name change requests.
+      - You need to fax / email a copy of the proof of name change.
+        - Court document
+        - Birth Certificate
+        - Marriage certificate
+        - Divorce decree
+      - Photo ID with any of the above mentioned documents.
+        - Must have one of the above documents in conjunction with a government issued photo id.
+        - Relevant documents should be current and have valid expiration (Not Expired).
+      - Documents can be submitted to the following email/fax :
+        - Email: docs@my.usdirectexpress.com
+        - Fax: 1-650-649-1942
+
+  utter_faq/dob:
+  - text: |-
+      Following process will be followed by relevant teams to cater date of birth(DOB) change requests.
+      - You need to fax / email a copy of the second form of proof of identity (POI) for date of birth update.
+        - Court document
+        - Birth Certificate
+        - Marriage certificate
+        - Divorce decree
+      - Photo ID with any of the above mentioned documents.
+        - Must have one of the above documents in conjunction with a government issued photo id.
+        - Relevant documents should be current and have valid expiration (Not Expired).
+      - Documents can be submitted to the following email/fax :
+        - Email: docs@my.usdirectexpress.com
+        - Fax: 1-650-649-1942
+
+  utter_faq/ssn_update:
+  - text: |-
+      Following process will be followed by relevant teams to cater Social Security Number update requests.
+      - You need to fax / email your Photo ID along with their Social Security Card  for SSN update.
+      - Photo ID with any of the above mentioned documents.
+        - Must have one of the above documents in conjunction with a government issued photo id.
+        - Relevant documents should be current and have valid expiration (Not Expired).
+      - Documents can be submitted to the following email/fax :
+        - Email: docs@my.usdirectexpress.com
+        - Fax: 1-650-649-1942
+
+actions:
+- action_ask_last4ofcard
+- action_balance_inquiry
+- action_card_status_update
+- action_switch_back_ask
+- action_switch_forms_affirm
+- action_switch_forms_ask
+- action_switch_forms_deny
+- utter_card_block_request_finished
+- utter_greet
+- utter_happy
+- utter_inform_card_blocking_option
+- validate_balance_inquiry_form
+- validate_card_status_update_form
+forms:
+  card_status_update_form:
+    ignored_intents: []
+    required_slots:
+    - AA_CONTINUE_FORM
+    - user_authenticated
+    - card_number
+  balance_inquiry_form:
+    ignored_intents: []
+    required_slots:
+    - AA_CONTINUE_FORM
+    - user_authenticated
+    - SSN
+    - last4ofcard

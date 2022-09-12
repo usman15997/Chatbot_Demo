@@ -1,0 +1,414 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - ho
+- intent: thankyou
+  examples: |
+    - thank you goodbye
+    - okay thank you goodbye
+    - thank you bye
+    - um okay thank you good bye
+    - thank you
+    - and thats all thank you and good bye
+    - okay thank you
+    - thanks
+    - thanks goodbye
+    - thank you and good bye
+    - Thanks!
+    - Awesome, you are a good bot!
+    - great!
+    - I see, thanks
+    - Oh thats good!
+    - it's good :-)
+    - thnaks
+    - good job bot
+    - great
+    - thanks for the help
+    - thanks you
+    - thanks!
+    - thankyou
+    - thnks
+    - thx
+    - thanks for your information
+    - thanks f
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - yes i want to
+    - ok
+- intent: goodbye
+  examples: |
+    - see you later
+    - goodbye
+    - i'm done
+    - quit
+    - stop
+    - bye
+    - Adios
+    - BYEE
+    - GOODBYE
+    - Thanks a lot. See ya later
+    - have a good day. time to go, bye
+    - bye bye
+    - ok i gtg
+    - bye bye bot
+    - bye for now
+    - bye udo
+    - bye was nice talking to you
+    - bye!
+    - byee
+    - catch you later
+    - ciao
+    - cya
+    - farewell
+    - good bye
+    - good bye rasa bot!
+    - good night
+    - goodbye
+    - goodbye.
+    - goodnight
+    - gotta go
+- intent: deny
+  examples: |
+    - not really
+    - no
+    - I don't think so
+    - never
+    - no way
+    - nope
+    - no thanks
+    - I dunno
+    - Nothing!
+    - nevermind
+    - n
+    - i decline
+    - i don not like this
+    - i don't think so
+    - i don't want either of those
+    - i don't want to
+    - i don't want to give you my email
+    - i dont want to
+    - i dont want to accept :P lol
+    - i guess it means - no
+    - i'm afraid not
+    - i'm not sure
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - good
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+    - i'm good
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - feeling sick
+    - not good
+    - not very good
+    - not feeling well today
+    - extremly sad
+    - so saad
+    - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: temporary_block_intimation
+  examples: |
+    - i want to block my card
+    - block my card
+    - temporarily block my card
+    - please put my card on temporary block
+    - want to block card
+    - block
+    - bloxk my card
+- intent: profile_update_intimation
+  examples: |
+    - want to update [number](profile_element)
+    - update my [number](profile_element)
+    - need to update [number](profile_element)
+    - change my [number](profile_element)
+    - [number](profile_element) update
+    - want to update [email](profile_element)
+    - update my [email](profile_element)
+    - need to update [email](profile_element)
+    - change my [email](profile_element)
+    - [email](profile_element) update
+- intent: authenticate_me
+  examples: |
+    - i'm authenticated
+    - please authenticate me
+    - authenticated
+    - authenticate
+    - authenticate me
+    - log me in
+    - login me
+- intent: inform_number
+  examples: |
+    - my card number is [25165461315](number)
+    - card number is [16516316502](number)
+    - number is [515643211](number)
+    - my card is [541258166](number)
+    - [4587956](number)
+    - [4569778](number)
+    - [4568894](number)
+    - [4561236](number)
+    - [123466](number)
+    - [7894566](number)
+    - [1245](number)
+    - [123456](number)
+    - [123455](number)
+    - [1245](number)
+    - [4658](number)
+
+- intent: inform_number
+  examples: |
+    - my card number is [25165461315](number)
+    - card number is [16516316502](number)
+    - number is [515643211](number)
+    - my card is [541258166](number)
+    - [4587956](number)
+    - [4569778](number)
+    - [4568894](number)
+    - [4561236](number)
+    - [123466](number)
+    - [7894566](number)
+
+- intent: inform_email
+  examples: |
+    - my email addess was [usmanimtiaz1997@gmail.com](email)
+    - my email was [usmanimtiaz@gmail.com](email)
+    - [john@i2cinc.com](email)
+    - my new email addess is [usmanimtiaz1997@gmail.com](email)
+    - my email is [usmanimtiaz@gmail.com](email)
+    - [john@hotmail.com](email)
+    - [usman@hotmail.com](email)
+    - [usman@gmail.com](email)
+    - [usman1997@gmail.com](email)
+
+- intent: help
+  examples: |
+    - help
+    - what can you do?
+    - what can I ask you?
+    - what do you do?
+    - what can you help me with?
+    - help me
+    - help, what do you do
+    - how do I use this
+    - how can you help me
+    - What are the things that you can do?
+    - What else can you help me with?
+    - can you do anything else?
+    - can you help me?
+    - come back
+    - cool! can I do something else here?
+    - hello what can you do for me
+    - help please
+    - help pls
+    - help?
+    - hep me
+- intent: stop
+  examples: |
+    - stop
+    - i don't want to continue
+- intent: inform_name
+  examples: |
+    - my name is [John Peter](Person)
+    - name is [william brook](Person)
+    - [Lewis Adam](Person)
+    - [Bob](Person)
+    - [bill](Person)
+    - [anusha](Person)
+    - name [John](Person)
+    - i'm [gary](Person)
+    - [Claire](PERSON) here
+    - [Imani](PERSON)
+    - [darnell](PERSON)
+    - [Guangchen](Person)
+    - [cheng](Person)
+    - [William Baker](Person)
+    - [Evan Oslo](Person)
+    - [Lisa Macintyre](Person)
+    - [Karen Lancaster](Person)
+    - [Percy Donald](Person)
+    - [Kyle Gardner](Person)
+    - [Katy Parrow](Person)
+    - [Percy] (Person)
+    - [Laura Schilling](Person)
+- intent: check_balance
+  examples: |
+    - How much money is on my account?
+    - How much money is on my bank account?
+    - what's my balance?
+    - what's my current balance?
+    - What's left on that account?
+    - How much do I have on that account?
+    - What's the balance on that account?
+    - How much money is left on that account?
+    - what is my account balance
+    - what's my account balance?
+    - what's my account balance
+    - whats my account balance
+    - what is my bank account balance
+    - what's my bank account balance?
+    - what's my bank account balance
+    - whats my bank account balance
+    - Can you tell me my account balance?
+    - Hello, I would like to know how much money is in much money is in my account
+    - hi, whats my account bal please
+    - so.... what's my balance?
+    - whats my current balance
+    - What's my balance?
+    - How much money do I have?
+    - Yeah, I like coffee 👀 But how much money do I have?
+    - Yeah, I know 😀 Since it's so nice: How much money do I have?
+    - what places have I spent money?
+    - Wait, I'll have to check my balance first. Can you do that please?
+    - Hi, I need to know how much money is in my [checking] account
+    - Balance please
+    - can i check my balance first?
+    - check balance first
+    - check balance
+
+- intent: faq/balance_discrepency
+  examples: |
+    - this is not my balance
+    - why my balance is not accurate?
+    - this is not the money i have
+    - i didn't have that much money
+    - i disagree
+    - i didn't perform this transaction
+
+- intent: faq/card_replacement
+  examples: |
+    - when will i get my card
+    - how long will it take to receive my new card
+    - why didn't i get my card yet
+    - where is my card
+    - i have lost my card
+    - my card is stolen
+    - how long i have to wait for my new card
+
+- intent: faq/mailing_address
+  examples: |
+    - i have changed my home
+    - who should i notify if i change my mailing address
+    - my mailing address has been changed
+    - i have moved to somewhere else
+
+- intent: faq/pin_change
+  examples: |
+    - i want to change my pin
+    - how can i change my pin
+    - who should i notify about my pin change
+    - pin update
+    - pin change
+    - i forgot my pin
+    - i have lost my pin
+    - forgot my pin
+
+- intent: faq/change_name
+  examples: |
+    - i want to change my name
+    - how can i change my name
+    - who should i notify to change my name
+    - name change
+    - i update my name
+    - i want to update name on my account
+
+- intent: faq/dob
+  examples: |
+    - i want to change my dob
+    - how can i change my date of birth
+    - who should i notify to change my date of birth
+    - dob change
+    - i update my date of birth
+    - i want to update DOB on my account
+
+- intent: faq/ssn_update
+  examples: |
+    - i want to change my ssn
+    - how can i change my ssn on account
+    - who should i notify to change my SSN
+    - ssn change
+    - i update my ssn
+    - i want to update ssn on my account
+
+- intent: out_of_scope
+  examples: |
+    - what is the square root of 5
+    - I want to know the weather
+    - what is the meaning of life.
+    - Fridge Isn't Running
+    - my tv isn't working
+    - I want a pizza
+    - my washing machine isn't working
+    - what year is it
+    - order a pizza
+    - I want to order a pizza
+    - what is the weather today
+    - what is the weather
+    - what the weather today ?
+    - hows the weather
+    - tell me a joke
+    - Can I get a hamburger?
+    - Can YouTube talk?
+    - Can you call me back ?
+    - Can you give me your datacenter's password
+    - Can you give me your datacenter's password?
+    - Can you make sandwiches?
+    - Can you please send me an uber
+    - ofif fsdfafsfs

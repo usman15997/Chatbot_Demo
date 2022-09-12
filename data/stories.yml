@@ -1,0 +1,51 @@
+version: "3.1"
+
+stories:
+
+
+- story: stop card status form
+  steps:
+  - intent: stop
+  - active_loop: null
+  - action: utter_offer_help
+
+- story: Temp Block + check balance + switch_form + Deny
+  steps:
+  - intent: temporary_block_intimation
+  - action: utter_inform_card_blocking_option
+  - action: card_status_update_form
+  - active_loop: card_status_update_form
+  - slot_was_set:
+    - requested_slot: AA_CONTINUE_FORM
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - AA_CONTINUE_FORM: true
+  - slot_was_set:
+    - requested_slot: user_authenticated
+  - slot_was_set:
+    - user_authenticated: true
+  - slot_was_set:
+    - user_authenticated: true
+  - slot_was_set:
+    - requested_slot: card_number
+  - intent: check_balance
+  - action: action_switch_forms_ask
+  - slot_was_set:
+    - next_form_name: balance_inquiry_form
+  - intent: deny
+  - action: action_switch_forms_deny
+  - slot_was_set:
+    - next_form_name: null
+  - action: card_status_update_form
+  - slot_was_set:
+    - requested_slot: card_number
+  - slot_was_set:
+    - card_number: '123455'
+  - slot_was_set:
+    - card_number: 123455
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_card_status_update
+  - action: utter_card_block_request_finished
